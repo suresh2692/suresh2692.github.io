@@ -1,5 +1,84 @@
-.h1 {
-    font-family: 'Imprint MT Shadow';
-    font-size: 20px
+html {
+	background-color: #000;
+	color: #fff;
+
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
+h1 a,
+h1 a:link,
+h1 a:active,
+h1 a:visited,
+h1 a:hover {
+	color: inherit;
+}
+
+a,
+a:link,
+a:active,
+a:visited,
+a:hover {
+	text-decoration: none;
+	color: #d00;
+}
+a:hover {
+	color: #e00;
+}
+
+
+h1 {
+	font-size: 80px;
+	font-weight: 600;
+	margin-bottom: 0.2em;
+	color: white;
+}
+
+h2 {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 3.2em;
+	color: #444;
+}
+
+h3 {
+	font-size: 22px;
+	font-weight: 600;
+	margin-bottom: 0em;
+}
+
+h2 .bullet {
+	color: #d00;
+}
+
+h3 .bullet {
+	color: #333;
+}
+
+#card {
+	margin-top: 60px;
+	max-width: 500px;
+
+	margin-left: auto;
+	margin-right: auto;
+	text-align: right;
+}
+
+p {
+	text-align: left;
+}
+
+.project {
+	line-height: 1.4;
+	margin-bottom: 36px;
+}
+
+#icon {
+	max-height: 100px;
+	max-height: 100px;
+	width: auto;
+	height: auto;
+	border-radius: 16px;
+}

@@ -1,1 +1,2 @@
-# suresh2692.github.io
+# personal blog
+suresh2692.github.io
