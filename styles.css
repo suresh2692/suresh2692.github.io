@@ -82,3 +82,10 @@ p {
 	height: auto;
 	border-radius: 16px;
 }
+
+#footer {
+    position: absolute;
+    bottom: 10;
+    width: 95%;
+		text-align: center;
+}
