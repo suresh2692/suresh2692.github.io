@@ -110,6 +110,89 @@ body {
     margin-bottom: 4rem;
 }
 
+.contact-grid.compact {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.contact-card {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    padding: 1rem 1.25rem;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-card .contact-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.contact-card .label {
+    font-size: 0.75rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.contact-card .value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.contact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.contact-card.contact-email .contact-icon {
+    background: linear-gradient(135deg, #f12711, #f5af19);
+}
+
+.contact-card.contact-github .contact-icon {
+    background: linear-gradient(135deg, #0f2027, #203a43);
+}
+
+.contact-card.contact-linkedin .contact-icon {
+    background: linear-gradient(135deg, #0072b1, #00a0dc);
+}
+
+.contact-card.contact-twitter .contact-icon {
+    background: linear-gradient(135deg, #1da1f2, #0d8ddb);
+}
+
+.contact-card.contact-stackoverflow .contact-icon {
+    background: linear-gradient(135deg, #f48024, #fbc02d);
+}
+
+.contact-card.contact-gravatar .contact-icon {
+    background: linear-gradient(135deg, #4b6cb7, #182848);
+}
+
 /* Header & Typography */
 .hero {
     margin-bottom: 2rem;
