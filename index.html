@@ -1,61 +1,88 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Suresh Kumar</title>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css" type="text/css" />
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suresh Kumar</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
-
 <body>
-	<div>
-	<a href="https://github.com/suresh2692/suresh-kumar.github.io/fork">
-			<img style="position: absolute; top: 0; right: 0; border: 0;"
-			 src=images/forkme.png alt="Fork me on GitHub"></a>
-	</div>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="insights.html" class="insights-link">Insights</a></li>
+        </ul>
+    </nav>
 
+    <main class="container">
+        <section id="about" class="hero">
+            <h1>Suresh Kumar</h1>
+            <div class="bio interactive-card">
+                <h2>Lead AI Engineer</h2>
 
-	<div id="card">
-		<h1>Suresh Kumar</h1>
-		<h2>Data Scientist <span class="bullet"> | </span> Software Engineer</h2>
-			
-		<h2>works@<a href="https://www.appliedmaterials.com/">Applied Materials</a></h2>
+                <p class="bio-summary">I curently work as a Lead Data Scientist with over a decade of experience building scalable AI systems and bringing machine learning solutions into production.</p>
+                <p class="bio-summary">I enjoy working on LLM-powered generative AI, real-time analytics, and cloud-native platforms. I’ve helped design end-to-end AI systems—from MLOps and deployment to explainability—and I’m especially passionate about turning complex AI ideas into practical, business-friendly products and smart automation.</p>
 
-				<h4 style="text-align:center">I would prefer</h4>
-				<h3 style="text-align:center;">
-					<a style="color:yellow" href="https://brave.com/"><u>Brave</u></a> over
-					<a style="color:yellow" href="https://www.google.com/chrome/"><u>Chrome</u></a> </h3>
+                <div class="bio-focus">
+                    <span class="bio-pill">LLM-powered Gen AI</span>
+                    <span class="bio-pill">Real-time Analytics</span>
+                    <span class="bio-pill">Cloud-native Platforms</span>
+                    <span class="bio-pill">MLOps & Explainability</span>
+                </div>
+                
+                <div class="preferences">
+                     <p>PS : I choose <a href="https://brave.com/" class="subtle-link">Brave</a> over <a href="https://www.google.com/chrome/" class="subtle-link">Chrome</a></p>
+                </div>
 
-</div>
+                <div class="cta-row">
+                    <a href="insights.html" class="btn insights-cta">View Insights</a>
+                </div>
+            </div>
+        </section>
 
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div id="projects-grid" class="content-grid projects-grid">
+                <!-- Blog posts will be populated here by JS -->
+            </div>
+        </section>
 
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="content-grid contact-grid">
+                <!-- Social Links -->
+                <a href="https://github.com/suresh2692" class="grid-item link-item">
+                    <span>GitHub</span>
+                </a>
+                <a href="https://stackoverflow.com/users/4815313/suresh2692" class="grid-item link-item">
+                    <span>Stackoverflow</span>
+                </a>
+                <a href="https://in.linkedin.com/in/suresh-kumar-49982064" class="grid-item link-item">
+                    <span>Linkedin</span>
+                </a>
+                <a href="https://twitter.com/suresh2692" class="grid-item link-item">
+                    <span>Twitter</span>
+                </a>
+                <a href="http://en.gravatar.com/suresh2692" class="grid-item link-item">
+                    <span>Gravatar</span>
+                </a>
+                <a href="mailto:suresh2692@gmail.com" class="grid-item link-item">
+                    <span>Email</span>
+                </a>
+            </div>
+        </section>
 
-	<div class="hlinks">
-		<p>
-			<h3>
-				<a href="https://github.com/suresh2692">GitHub</a>
-				<span class="bullet">•</span>
-				<a href="https://stackoverflow.com/users/4815313/suresh2692">Stackoverflow</a>
-				<span class="bullet">•</span>
-				<a href="https://in.linkedin.com/in/suresh-kumar-49982064">Linkedin</a>
-				<span class="bullet">•</span>
-				<a href="https://twitter.com/suresh2692">Twitter</a>
-				<span class="bullet">•</span>
-				<a href="http://en.gravatar.com/suresh2692">Gravatar</a>
-				<span class="bullet">•</span>
-				<a href="mailto:suresh2692@gmail.com">Email</a>
-			</h3>
-		</p>
-	</div>
-	<div id="footer">
-		<i style="font-size:11px">
-			yaadhum oore yaavarum kelir
-		</i>
-	</div>
-
+        <footer>
+            <p><i>Hitch your wagon to a star.</i></p>
+        </footer>
+    </main>
+    <script>
+        window.ANALYTICS_ENDPOINT = window.ANALYTICS_ENDPOINT || 'http://localhost:4000';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-GO/J9HkWdW0pP4G7sq+bnoMx29Z8b75sTK8Ojix3YjrcQii33t6FBX1XhPmMu4t8Wc0u6w6dZ7zK6Y0C2hcK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/analytics.js"></script>
+    <script src="script.js"></script>
 </body>
-
-
 </html>
