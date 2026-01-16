@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Insights</title>
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-GO/J9HkWdW0pP4G7sq+bnoMx29Z8b75sTK8Ojix3YjrcQii33t6FBX1XhPmMu4t8Wc0u6w6dZ7zK6Y0C2hcK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin: 0.5rem 0;
+        }
+        .metric-label {
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .metric-subtle {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .card.chart-card {
+            grid-column: 1 / -1;
+            min-height: 360px;
+            overflow: hidden;
+        }
+        .card.chart-card canvas {
+            width: 100% !important;
+            height: 320px !important;
+            display: block;
+        }
+    </style>
+</head>
+<body data-disable-tracking="true">
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h1 class="section-title" style="margin-top: 0;">Analytics Dashboard</h1>
+        
+        <div class="dashboard">
+            <!-- Key Metrics -->
+            <div class="card">
+                <div class="metric-label">Total Sessions</div>
+                <div class="metric-value" id="totalSessions">0</div>
+            </div>
+            <div class="card">
+                <div class="metric-label">Avg. Time on Screen</div>
+                <div class="metric-value" id="avgTime">0s</div>
+            </div>
+            <div class="card">
+                <div class="metric-label">Avg. Scroll Depth</div>
+                <div class="metric-value" id="avgScroll">0%</div>
+            </div>
+            <div class="card">
+                <div class="metric-label">Total Clicks</div>
+                <div class="metric-value" id="totalClicks">0</div>
+            </div>
+            <div class="card">
+                <div class="metric-label">Most Engaged Section</div>
+                <div class="metric-value" id="topSection">—</div>
+                <div class="metric-subtle" id="topSectionTime"></div>
+            </div>
+            <div class="card">
+                <div class="metric-label">Peak Engagement (IST)</div>
+                <div class="metric-value" id="peakHour">—</div>
+                <div class="metric-subtle" id="peakSessions"></div>
+            </div>
+
+            <!-- Charts -->
+            <div class="card chart-card">
+                <h3>Device & Browser Stats</h3>
+                <canvas id="deviceChart"></canvas>
+            </div>
+            <div class="card chart-card">
+                <h3>Section Engagement (Time Spent)</h3>
+                <canvas id="sectionChart"></canvas>
+            </div>
+            <div class="card chart-card">
+                <h3>User Interaction Heatmap (Click Density)</h3>
+                <canvas id="clickChart"></canvas>
+            </div>
+            <div class="card chart-card">
+                <h3>Weekly Activity Timeline</h3>
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+    </main>
+
+    <script>
+        window.ANALYTICS_ENDPOINT = window.ANALYTICS_ENDPOINT || 'http://localhost:4000';
+    </script>
+    <script src="js/analytics.js"></script>
+    <script>
+        const formatDuration = (seconds = 0) => {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            if (mins === 0) return `${secs}s`;
+            return `${mins}m ${secs}s`;
+        };
+
+        const aggregateSessions = (sessions = []) => {
+            if (!sessions.length) return null;
+            const reducer = {
+                sessions: sessions.length,
+                totalTime: 0,
+                totalScroll: 0,
+                totalClicks: 0,
+                screenSizes: {},
+                clickTargets: {},
+                sections: {},
+                timeline: {}
+            };
+
+            sessions.forEach((session) => {
+                reducer.totalTime += session.timeOnScreen || 0;
+                reducer.totalScroll += session.scrollDepth || 0;
+                reducer.totalClicks += (session.clicks || []).length;
+                const size = session.deviceInfo?.screenSize || 'unknown';
+                reducer.screenSizes[size] = (reducer.screenSizes[size] || 0) + 1;
+
+                (session.clicks || []).forEach((click) => {
+                    const label = `${click.target}${click.text ? ` (${click.text.trim()})` : ''}`;
+                    reducer.clickTargets[label] = (reducer.clickTargets[label] || 0) + 1;
+                });
+
+                Object.entries(session.sections || {}).forEach(([key, value]) => {
+                    const entry = reducer.sections[key] || { time: 0, enters: 0 };
+                    entry.time += value.time || 0;
+                    entry.enters += value.enters || 0;
+                    reducer.sections[key] = entry;
+                });
+
+                const hourKey = new Date(session.endTime || session.startTime).toISOString().slice(0, 13);
+                reducer.timeline[hourKey] = (reducer.timeline[hourKey] || 0) + 1;
+            });
+
+            return {
+                sessions: reducer.sessions,
+                avgTimeOnScreen: Math.round(reducer.totalTime / reducer.sessions),
+                avgScrollDepth: Math.round(reducer.totalScroll / reducer.sessions),
+                totalClicks: reducer.totalClicks,
+                screenSizes: reducer.screenSizes,
+                clickTargets: reducer.clickTargets,
+                sections: reducer.sections,
+                timeline: reducer.timeline
+            };
+        };
+
+        const fetchFromApi = async () => {
+            if (!window.ANALYTICS_ENDPOINT) throw new Error('No endpoint configured');
+            const response = await fetch(`${window.ANALYTICS_ENDPOINT.replace(/\/$/, '')}/metrics`, { cache: 'no-store' });
+            if (!response.ok) throw new Error('Analytics API unavailable');
+            return response.json();
+        };
+
+        const hydrateDashboard = (summary) => {
+            if (!summary) {
+                document.querySelector('.dashboard').innerHTML = '<div class="card">No analytics data available yet. Interact with the main site first!</div>';
+                return;
+            }
+
+            document.getElementById('totalSessions').textContent = summary.sessions;
+            document.getElementById('avgTime').textContent = formatDuration(summary.avgTimeOnScreen || 0);
+            document.getElementById('avgScroll').textContent = `${summary.avgScrollDepth || 0}%`;
+            document.getElementById('totalClicks').textContent = summary.totalClicks || 0;
+
+            const sectionEntries = Object.entries(summary.sections || {});
+            const topSection = sectionEntries.sort((a, b) => (b[1].time || 0) - (a[1].time || 0))[0];
+            if (topSection) {
+                document.getElementById('topSection').textContent = topSection[0];
+                document.getElementById('topSectionTime').textContent = `${formatDuration(topSection[1].time)} engaged over ${topSection[1].enters} visits`;
+            } else {
+                document.getElementById('topSection').textContent = '—';
+                document.getElementById('topSectionTime').textContent = 'Not enough data yet';
+            }
+
+            const timelineEntries = Object.entries(summary.timeline || {});
+            const peak = timelineEntries.sort((a, b) => b[1] - a[1])[0];
+            if (peak) {
+                const date = new Date(`${peak[0]}:00:00.000Z`);
+                document.getElementById('peakHour').textContent = date.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', hour: 'numeric' });
+                document.getElementById('peakSessions').textContent = `${peak[1]} sessions`;
+            } else {
+                document.getElementById('peakHour').textContent = '—';
+                document.getElementById('peakSessions').textContent = 'Not enough data yet';
+            }
+
+            const ctxDevice = document.getElementById('deviceChart').getContext('2d');
+            new Chart(ctxDevice, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(summary.screenSizes || {}),
+                    datasets: [{
+                        label: 'Sessions by Screen Resolution',
+                        data: Object.values(summary.screenSizes || {}),
+                        backgroundColor: '#116dff'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            const ctxSections = document.getElementById('sectionChart').getContext('2d');
+            new Chart(ctxSections, {
+                type: 'bar',
+                data: {
+                    labels: sectionEntries.map(([key]) => key),
+                    datasets: [{
+                        label: 'Time Spent (seconds)',
+                        data: sectionEntries.map(([, value]) => value.time || 0),
+                        backgroundColor: '#ED1566'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y' }
+            });
+
+            const ctxClick = document.getElementById('clickChart').getContext('2d');
+            const clickEntries = Object.entries(summary.clickTargets || {}).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            new Chart(ctxClick, {
+                type: 'doughnut',
+                data: {
+                    labels: clickEntries.map(([label]) => label.substring(0, 40)),
+                    datasets: [{
+                        data: clickEntries.map(([, count]) => count),
+                        backgroundColor: [
+                            '#116dff', '#ED1566', '#FFC107', '#4CAF50', '#9C27B0',
+                            '#FF5722', '#795548', '#607D8B', '#E91E63', '#3F51B5'
+                        ]
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            const ctxTimeline = document.getElementById('timelineChart').getContext('2d');
+            const sortedTimeline = timelineEntries.sort((a, b) => new Date(a[0]) - new Date(b[0]));
+            new Chart(ctxTimeline, {
+                type: 'line',
+                data: {
+                    labels: sortedTimeline.map(([key]) => new Date(`${key}:00:00.000Z`).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', hour: 'numeric' })),
+                    datasets: [{
+                        label: 'Sessions',
+                        data: sortedTimeline.map(([, value]) => value),
+                        borderColor: '#116dff',
+                        tension: 0.3,
+                        fill: false
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            let summary = null;
+            try {
+                summary = await fetchFromApi();
+            } catch (error) {
+                const fallbackSessions = SecureStorage.load();
+                summary = aggregateSessions(fallbackSessions);
+            }
+            hydrateDashboard(summary);
+        });
+    </script>
+</body>
+</html>

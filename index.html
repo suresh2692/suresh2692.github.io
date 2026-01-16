@@ -1,61 +1,129 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Suresh Kumar</title>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css" type="text/css" />
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suresh Kumar</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
-
 <body>
-	<div>
-	<a href="https://github.com/suresh2692/suresh-kumar.github.io/fork">
-			<img style="position: absolute; top: 0; right: 0; border: 0;"
-			 src=images/forkme.png alt="Fork me on GitHub"></a>
-	</div>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="insights.html" class="insights-link">Insights</a></li>
+        </ul>
+    </nav>
 
+    <main class="container">
+        <section id="about" class="hero">
+            <h1>Suresh Kumar</h1>
+            <div class="bio interactive-card">
+                <h2>Lead AI Engineer</h2>
 
-	<div id="card">
-		<h1>Suresh Kumar</h1>
-		<h2>Data Scientist <span class="bullet"> | </span> Software Engineer</h2>
-			
-		<h2>works@<a href="https://www.appliedmaterials.com/">Applied Materials</a></h2>
+                <p class="bio-summary">I curently work as a Lead Data Scientist with over a decade of experience building scalable AI systems and bringing machine learning solutions into production.</p>
+                <p class="bio-summary">I enjoy working on LLM-powered generative AI, real-time analytics, and cloud-native platforms. I’ve helped design end-to-end AI systems—from MLOps and deployment to explainability—and I’m especially passionate about turning complex AI ideas into practical, business-friendly products and smart automation.</p>
 
-				<h4 style="text-align:center">I would prefer</h4>
-				<h3 style="text-align:center;">
-					<a style="color:yellow" href="https://brave.com/"><u>Brave</u></a> over
-					<a style="color:yellow" href="https://www.google.com/chrome/"><u>Chrome</u></a> </h3>
+                <div class="bio-focus">
+                    <span class="bio-pill">LLM-powered Gen AI</span>
+                    <span class="bio-pill">Real-time Analytics</span>
+                    <span class="bio-pill">Cloud-native Platforms</span>
+                    <span class="bio-pill">MLOps & Explainability</span>
+                </div>
+                
+                <div class="preferences">
+                     <p>PS : I choose <a href="https://brave.com/" class="subtle-link">Brave</a> over <a href="https://www.google.com/chrome/" class="subtle-link">Chrome</a></p>
+                </div>
 
-</div>
+                <div class="cta-row">
+                    <a href="insights.html" class="btn insights-cta">View Insights</a>
+                </div>
+            </div>
+        </section>
 
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div id="projects-grid" class="content-grid projects-grid">
+                <!-- Blog posts will be populated here by JS -->
+            </div>
+        </section>
 
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-grid compact">
+                <a href="mailto:suresh2692@gmail.com" class="contact-card contact-email">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 2.2v.3l9 5.1 9-5.1v-.3L12 12.2 3 7.2z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">Email</span>
+                    </div>
+                </a>
+                <a href="https://github.com/suresh2692" class="contact-card contact-github" target="_blank" rel="noreferrer">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.34.73-4.04-1.61-4.04-1.61-.53-1.33-1.31-1.69-1.31-1.69-1.07-.75.08-.74.08-.74 1.18.08 1.8 1.22 1.8 1.22 1.05 1.8 2.74 1.28 3.41.98.11-.77.41-1.28.74-1.57-2.66-.3-5.46-1.34-5.46-5.95 0-1.31.47-2.38 1.23-3.22-.13-.3-.54-1.52.12-3.16 0 0 1-.32 3.3 1.23a11.3 11.3 0 0 1 6 0c2.29-1.55 3.29-1.23 3.29-1.23.67 1.64.26 2.86.13 3.16.76.84 1.22 1.91 1.22 3.22 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.23v3.3c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">GitHub</span>
+                    </div>
+                </a>
+                <a href="https://in.linkedin.com/in/suresh-kumar-49982064" class="contact-card contact-linkedin" target="_blank" rel="noreferrer">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M20.45 20.45h-3.55v-5.3c0-1.27-.02-2.91-1.78-2.91-1.78 0-2.05 1.39-2.05 2.82v5.39H9.52V9h3.4v1.56h.05c.47-.9 1.62-1.85 3.33-1.85 3.56 0 4.22 2.34 4.22 5.39v6.35ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm-1.78 13.02h3.55V9H3.56v11.45Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">LinkedIn</span>
+                    </div>
+                </a>
+                <a href="https://twitter.com/suresh2692" class="contact-card contact-twitter" target="_blank" rel="noreferrer">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M17.18 2.25h3.02l-6.6 7.54 7.78 11.96h-6.09l-4.78-7.03-5.48 7.03H2.01l7.05-8.52-7.41-10.98h6.27l4.32 6.52 5.94-6.52Zm-1.06 18.2h1.67L7.96 4.9H6.15l9.97 15.55Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">Twitter</span>
+                    </div>
+                </a>
+                <a href="https://stackoverflow.com/users/4815313/suresh2692" class="contact-card contact-stackoverflow" target="_blank" rel="noreferrer">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M18.24 21.75v-5.19h2.02V24H3.75v-7.44h2.02v5.19h12.47Zm-9.04-3.67h9.05v-2.02H9.2v2.02Zm.24-4.42 8.84 1.86.42-1.97-8.85-1.86-.41 1.97Zm1.21-4.49 8.19 3.83.84-1.79-8.2-3.82-.83 1.78Zm2.45-4.3 6.72 5.87 1.32-1.51-6.71-5.87-1.33 1.51Zm4.08-4.62-1.63 1.2 5.46 7.35 1.63-1.2-5.46-7.35Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">Stack Overflow</span>
+                    </div>
+                </a>
+                <a href="http://en.gravatar.com/suresh2692" class="contact-card contact-gravatar" target="_blank" rel="noreferrer">
+                    <span class="contact-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="presentation">
+                            <path d="M11.98 1.5A10.5 10.5 0 1 0 22.5 12a10.5 10.5 0 0 0-10.52-10.5Zm0 18.94A8.44 8.44 0 1 1 20.42 12a8.44 8.44 0 0 1-8.44 8.44Zm-.03-15.61a1 1 0 0 0-1 1v8.94a1 1 0 1 0 2 0V5.83a1 1 0 0 0-1-1Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <div class="contact-meta">
+                        <span class="label">Gravatar</span>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-	<div class="hlinks">
-		<p>
-			<h3>
-				<a href="https://github.com/suresh2692">GitHub</a>
-				<span class="bullet">•</span>
-				<a href="https://stackoverflow.com/users/4815313/suresh2692">Stackoverflow</a>
-				<span class="bullet">•</span>
-				<a href="https://in.linkedin.com/in/suresh-kumar-49982064">Linkedin</a>
-				<span class="bullet">•</span>
-				<a href="https://twitter.com/suresh2692">Twitter</a>
-				<span class="bullet">•</span>
-				<a href="http://en.gravatar.com/suresh2692">Gravatar</a>
-				<span class="bullet">•</span>
-				<a href="mailto:suresh2692@gmail.com">Email</a>
-			</h3>
-		</p>
-	</div>
-	<div id="footer">
-		<i style="font-size:11px">
-			yaadhum oore yaavarum kelir
-		</i>
-	</div>
-
+        <footer>
+            <p><i>Hitch your wagon to a star.</i></p>
+        </footer>
+    </main>
+    <script>
+        window.ANALYTICS_ENDPOINT = window.ANALYTICS_ENDPOINT || '';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-GO/J9HkWdW0pP4G7sq+bnoMx29Z8b75sTK8Ojix3YjrcQii33t6FBX1XhPmMu4t8Wc0u6w6dZ7zK6Y0C2hcK4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/analytics.js"></script>
+    <script src="script.js"></script>
 </body>
-
-
 </html>
